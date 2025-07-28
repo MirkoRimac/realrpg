@@ -1,9 +1,11 @@
-<h2>Your Quests</h2>
+<div class="container-fluid">
+    <h2>Your Quests</h2>
 
-<ul>
-    <?php foreach($quests as $quest): ?>
-    <li><? htmlspecialchars($quest[$title]); ?> (<? $quest["xp"] ?> XP)</li>
-    <?php endforeach; ?>
-</ul>
+    <ul>
+        <?php foreach($quests as $quest): ?>
+        <li><? htmlspecialchars($quest[$title]); ?> (<? $quest["xp"] ?> XP)</li>
+        <?php endforeach; ?>
+    </ul>
 
-<a href="?controller=quest&action=create">Add new Quest</a>
+    <a href="?controller=quest&action=create">Add new Quest</a>
+</div>

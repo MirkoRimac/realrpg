@@ -13,6 +13,7 @@ class Router
 
         if(file_exists($controllerFile))
         {
+            require_once "../includes/header.php";
             require_once $controllerFile;
             $controllerObj = new $controllerName();
             if(method_exists($controllerObj, $action))
@@ -28,5 +29,6 @@ class Router
         {
             echo "Controller '$controllerName' nicht gefunden.";
         }
+        require_once "../includes/footer.php";
     }
 }

@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "Console";
+    src: url("../assets/fonts/clacon2.ttf");
+}
+
+body {
+    font-family: "Console";
+}
+
+nav, footer {
+    border: 1px solid black;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Dashboard */
+
+.avatar {
+    width: 300px;
+    height: 300px;
+}
+
+.progress {
+    background-color: grey;
+    height: 20px;
+    max-width: 300px;
+}
+
+.progress-bar {
+    background-color: #0097B2 !important;
+}
+
+table {
+    width: 100%;
+}
+
+tbody > tr {
+    border: 3px solid black !important;
+}
+
+.card-body > a {
+    font-size: 20px;
+    color: #D72D2D;
+}
+
+.add_entry_btn {
+    border: 1px solid #0097B2;
+    border-radius: 15px;
+    padding: 8px;
+    color: white;
+    background-color: #0097B2;
+}
+
+/* Dashboard End */

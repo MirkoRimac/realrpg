@@ -1,0 +1,20 @@
+- Available Quests sind die Quests mit dem Active => 0
+    - Soll per Drag & Drop in die Active Quests gezogen und angeordnet werden => Active wird 1
+
+- Active Quests
+    - Read more button
+    - Status Möglichkeit hinzufügen (In Progress, Done)
+    - Wie und wann werden die Rewards und XP vergeben?
+    - Wie soll die Quest auf Done gestellt werden?
+
+- Quests
+    - Quests über separate Seite einpflegen, user_id soll von der Session übernommen werden
+    - 
+
+- Wo werden die Rewards angezeigt, bzw. das Inventory? 
+    - Unter dem Profilbild unter Name, Class, Race, Gold - ?
+
+- Journal nach dem gleichen Prinzip wie die Active/Available Quests erstellen
+    - Journal auch separate Seite wie bei dem Anlegen von Quests
+    - Auf dem Dashboard soll eine Übersicht der Journals angezeigt werden mit z. B. max 200 Wörtern
+    - Über Read more... auf den Journal zugreifen

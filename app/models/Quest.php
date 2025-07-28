@@ -14,4 +14,12 @@ class Quest extends Model
         $stmt = $this->pdo->prepare("INSERT INTO quests (title,xp) VALUES (?, 50)");
         $stmt->execute([$title]);
     }
+
+    public function getActiveByUser($userId)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM quests WHERE user_id = ? AND is_active = 1");
+        $stmt->execute([$userId]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results ?: []; // ← Niemals NULL!
+    }
 }
