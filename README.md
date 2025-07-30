@@ -1,4 +1,4 @@
-# 🎮 Real Life RPG – PHP Web App
+# 🎮 Real RPG – PHP Web App
 
 **Real RPG** ist eine spielerische Webanwendung, die alltägliche Aufgaben in Quests verwandelt – 
 inspiriert von Rollenspielen (RPGs). Diese App unterstützt dich dabei, deine Ziele zu verfolgen, 
