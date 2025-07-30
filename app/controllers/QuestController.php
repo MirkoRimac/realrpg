@@ -1,6 +1,8 @@
 <?php
 
 require_once "../app/models/Quest.php";
+require_once "../app/helpers/xp.php";
+require_once "../app/models/User.php";
 
 class QuestController extends Controller
 {
@@ -87,5 +89,45 @@ class QuestController extends Controller
 
         header("Location: ?controller=dashboard&action=index");
         exit;
+    }
+
+    public function complete()
+    {
+
+        session_start();
+        $userId = $_SESSION["user_id"];
+        $questId = $_GET["id"] ?? null;
+
+        if (!$questId || !$userId) {
+            header("Location: ?controller=dashboard");
+            exit;
+        }
+
+        $questModel = new Quest();
+        $quest = $questModel->getById($questId);
+        $xpReward = $quest["xp"] ?? 0;
+
+        // 1. Quest deaktivieren
+        $questModel->updateStatus($questId, 0);
+
+        // 2. XP hinzufügen
+        $userModel = new User();
+        $user = $userModel->getById($userId);
+        $currentXp = $user["xp"];
+        $currentLevel = $user["level"];
+
+        $newXp = $currentXp + $xpReward;
+        $xpNeeded = xpForNextLevel($currentLevel);
+
+        if ($newXp >= $xpNeeded)
+        {
+            $newXp -= $xpNeeded;
+            $currentLevel++;
+        }
+
+        // Nutzer aktualisieren
+        $userModel->updateXpAndLevel($userId, $newXp, $currentLevel);
+
+        header("Location: ?controller=dashboard");
     }
 }

@@ -16,4 +16,17 @@ class User extends Model
         $stmt->execute([$name, $email, $hashed]);
     }
 
+    public function getById($userId)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateXpAndLevel($userId, $xp, $level)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET xp = ?, level = ? WHERE id = ?");
+        $stmt->execute([$xp, $level, $userId]);
+    }
+
 }

@@ -1,0 +1,40 @@
+<section class="quests">
+            <h2>Aktive Quests</h2>
+            <?php if (empty($quests)): ?>
+                <p>Keine aktiven Quests</p>
+            <?php else: ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Reward</th>
+                            <th>XP</th>
+                            <th>Created at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($quests as $quest): ?>
+                            <tr class="active_quests">
+                                <td><?= htmlspecialchars($quest["title"]) ?></td>
+                                <td><?= htmlspecialchars($quest['is_active']) ?></td>
+                                <td><?= htmlspecialchars($quest['reward']) ?> Gold</td>
+                                <td><?= htmlspecialchars($quest['xp']) ?> XP</td>
+                                <td><?= date('d.m.Y', strtotime($quest['created_at'])) ?></td>
+                                <td>
+                                    <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" class="btn btn-success btn-sm">✔ Erledigt</a>
+                                </td>
+                                <td>
+                                    <form method="POST" action="?controller=quest&action=toggleStatus">
+                                        <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                                        <input type="hidden" name="is_active" value="0">
+                                        <button type="submit" class="btn btn-warning btn-sm">Cancel</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </section>

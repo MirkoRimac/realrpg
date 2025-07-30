@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/models/Dashboard.php";
+require_once "../app/models/User.php";
 
 class DashboardController extends Controller
 {
@@ -25,10 +26,14 @@ class DashboardController extends Controller
         $quests = $questModel->getActiveByUser($user_id);
         $availableQuests = $questModel->getInactiveByUser($user_id);
 
+        $userModel = new User();
+        $user = $userModel->getById($user_id);
+
         $this->view("dashboard/index", [
             "dashboard" => $dashboard,
             "quests" => $quests,
-            "availableQuests" => $availableQuests
+            "availableQuests" => $availableQuests,
+            "user" => $user
         ]);
 
         // $this->view("dashboard/index", ["dashboard" => $dashboard]);

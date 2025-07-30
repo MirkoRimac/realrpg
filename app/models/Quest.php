@@ -44,4 +44,11 @@ class Quest extends Model
         $stmt = $this->pdo->prepare("UPDATE quests SET is_active = ? WHERE id = ?");
         $stmt->execute([$isActive, $id]);
     }
+
+    public function getById($questId)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM quests WHERE id = ?");
+        $stmt->execute([$questId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

@@ -1,22 +1,37 @@
 <div class="container-fluid">
 
-<h2>Real RPG</h2>
+<h1 class="header text-center m-3">Real RPG</h1>
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3">
-        <img class="avatar" src="../../../assets/images/placeholder.jpg">
-        <div class="level text-center">
+        <img class="avatar" src="../assets/images/avatar.jpg">
+        <!-- <div class="level text-center">
             <p>Level 217</p>
             <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-bar text-bg-info" style="width: 75%">75%</div>
             </div>
             <p>500 / 12000 XP⭐</p>
-        </div>
+        </div> -->
 
-        <p>Name: Moschn</p>
-        <p>Class: Mage</p>
-        <p>Race: Night Elf</p>
+        <?php
+            require_once "../app/helpers/xp.php";
+            $xpNeeded = xpForNextLevel($user["level"]);
+            $percent = ($user["xp"] / $xpNeeded) * 100;
+        ?>
+        <div class="level text-center">
+            <p>Level <?php echo htmlspecialchars($user["level"]); ?></p>
+            <p><? htmlspecialchars($user["level"]); ?></p>
+            <div class="progress">
+                <div class="progress-bar" style="width: <?= $percent ?>%"><?= round($percent) ?>%</div>
+            </div>
+            <p><?= $user["xp"] ?> / <?= $xpNeeded ?> XP</p>
+        </div>
+        <div class="userInfo">
+            <p>Name: Mörko</p>
+            <p>Class: Mage</p>
+            <p>Race: Night Elf</p>
+        </div>
     </div>
 
     <div class="col-lg-6">
@@ -62,41 +77,33 @@
             <?php if (empty($quests)): ?>
                 <p>Keine aktiven Quests</p>
             <?php else: ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Status</th>
-                            <th>Reward</th>
-                            <th>XP</th>
-                            <th>Created at</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($quests as $quest): ?>
-                            <tr class="active_quests">
-                                <td><?= htmlspecialchars($quest["title"]) ?></td>
-                                <td><?= htmlspecialchars($quest['is_active']) ?></td>
-                                <td><?= htmlspecialchars($quest['reward']) ?> Gold</td>
-                                <td><?= htmlspecialchars($quest['xp']) ?> XP</td>
-                                <td><?= date('d.m.Y', strtotime($quest['created_at'])) ?></td>
-                                <td>
-                                    <form method="POST" action="?controller=quest&action=toggleStatus">
-                                        <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
-                                        <input type="hidden" name="is_active" value="0">
-                                        <button type="submit" class="btn btn-warning btn-sm">Cancel</button>
-                                    </form>
-                                </td>
-                            </tr>
+                <div class="quest-list">
+                <?php foreach ($quests as $quest): ?>
+                    <div class="quest-card">
+                    <h4><?= htmlspecialchars($quest["title"]) ?></h4>
+                    <p><strong>Status:</strong> <?= $quest['is_active'] ? "Aktiv" : "Inaktiv" ?></p>
+                    <p><strong>Reward:</strong> <?= $quest["reward"] ?> Gold</p>
+                    <p><strong>XP:</strong> <?= $quest["xp"] ?> XP</p>
+                    <p><strong>Erstellt:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
 
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                    <div class="quest-buttons">
+                        <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" class="btn btn-success">✔ Erledigt</a>
+
+                        <form method="POST" action="?controller=quest&action=toggleStatus">
+                        <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                        <input type="hidden" name="is_active" value="0">
+                        <button type="submit" class="btn btn-warning">✖ Cancel</button>
+                        </form>
+                    </div>
+                    </div>
+                <?php endforeach; ?>
+                </div>
             <?php endif; ?>
-        </section>
+            </section>
+
 
         <!-- Journal Area -->
-        <h2>Journal</h2>
+        <h2 class="mt-5">Journal</h2>
         <a href="#" class="add_entry_btn">Add Entry</a>
         
         <div class="card">
