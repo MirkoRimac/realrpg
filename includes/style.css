@@ -53,4 +53,21 @@ tbody > tr {
     background-color: #0097B2;
 }
 
+.active_quests {
+    padding: 20px !important;
+    margin: 5px !important;
+}
+
+table {
+    padding: 5px !important;
+}
+
 /* Dashboard End */
+
+/* New Quests */
+
+form {
+    display: grid;
+}
+
+/* New Quests End */

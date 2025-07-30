@@ -74,13 +74,21 @@
                     </thead>
                     <tbody>
                         <?php foreach ($quests as $quest): ?>
-                            <tr>
+                            <tr class="active_quests">
                                 <td><?= htmlspecialchars($quest["title"]) ?></td>
                                 <td><?= htmlspecialchars($quest['is_active']) ?></td>
                                 <td><?= htmlspecialchars($quest['reward']) ?> Gold</td>
                                 <td><?= htmlspecialchars($quest['xp']) ?> XP</td>
                                 <td><?= date('d.m.Y', strtotime($quest['created_at'])) ?></td>
+                                <td>
+                                    <form method="POST" action="?controller=quest&action=toggleStatus">
+                                        <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                                        <input type="hidden" name="is_active" value="0">
+                                        <button type="submit" class="btn btn-warning btn-sm">Cancel</button>
+                                    </form>
+                                </td>
                             </tr>
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -103,20 +111,36 @@
 
     <div class="col-lg-3">
         <h2>Available Quests</h2>
+        <a href="?controller=quest&action=create" class="add_entry_btn">Add Quest</a>
 
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Build a PHP Project</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Build a real project with PHP</h6>
-                <ul>
-                    <li><p class="card-text">Category: Main Quest</p></li>
-                    <li><p class="card-text">Reward: 100 Gold</p></li>
-                    <li><p class="card-text">XP: 500 XP</p></li>
-                </ul>
-                <a href="#" class="card-link">Read more...</a>
-            </div>
-            </div>
-        </div>
+        <?php if (empty($availableQuests)): ?>
+            <p>Keine verfügbaren Quests</p>
+        <?php else: ?>
+            <?php foreach ($availableQuests as $quest): ?>
+                <div class="card mb-3" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($quest["title"]) ?></h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <?= date('d.m.Y', strtotime($quest['created_at'])) ?>
+                        </h6>
+                        <ul>
+                            <li><p class="card-text">Belohnung: <?= $quest["reward"] ?> Gold</p></li>
+                            <li><p class="card-text">XP: <?= $quest["xp"] ?> XP</p></li>
+                        </ul>
+                        <p class="card-text"><?= nl2br(htmlspecialchars($quest["description"])) ?></p>
+                        <a href="#" class="card-link">Read more...</a>
+
+                        <form method="POST" action="?controller=quest&action=toggleStatus">
+                            <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                            <input type="hidden" name="is_active" value="1">
+                            <button type="submit" class="btn btn-success btn-sm">Activate</button>
+                        </form>
+
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 
   </div>
 </div>

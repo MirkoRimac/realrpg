@@ -23,10 +23,12 @@ class DashboardController extends Controller
 
         $questModel = new Quest();
         $quests = $questModel->getActiveByUser($user_id);
+        $availableQuests = $questModel->getInactiveByUser($user_id);
 
         $this->view("dashboard/index", [
             "dashboard" => $dashboard,
-            "quests" => $quests
+            "quests" => $quests,
+            "availableQuests" => $availableQuests
         ]);
 
         // $this->view("dashboard/index", ["dashboard" => $dashboard]);

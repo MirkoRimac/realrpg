@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <h2>Your Quests</h2>
 
     <ul>
