@@ -18,6 +18,7 @@ class DashboardController extends Controller
 
         require_once "../app/models/Dashboard.php";
         require_once "../app/models/Quest.php";
+        require_once "../app/models/Journal.php";
 
         $dashboardModel = new Dashboard();
         $dashboard = $dashboardModel->getAll();
@@ -26,6 +27,10 @@ class DashboardController extends Controller
         $quests = $questModel->getActiveByUser($user_id);
         $availableQuests = $questModel->getInactiveByUser($user_id);
 
+        $journalModel = new Journal();
+        $journals = $journalModel->getActiveByUser($user_id);
+        $availableJournal = $journalModel->getInactiveByUser($user_id);
+
         $userModel = new User();
         $user = $userModel->getById($user_id);
 
@@ -33,6 +38,8 @@ class DashboardController extends Controller
             "dashboard" => $dashboard,
             "quests" => $quests,
             "availableQuests" => $availableQuests,
+            "journals" => $journals,
+            "availableJournal" => $availableJournal,
             "user" => $user
         ]);
 

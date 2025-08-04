@@ -104,16 +104,25 @@
 
         <!-- Journal Area -->
         <h2 class="mt-5">Journal</h2>
-        <a href="#" class="add_entry_btn">Add Entry</a>
+        <a href="?controller=journal&action=create" class="add_entry_btn">Add Entry</a>
         
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Hothothot</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                <p class="card-text">Heute habe ich 3 Kabinen geschafft...</p>
-                <a href="#" class="card-link">Read more...</a>
-            </div>
-        </div>
+        <?php if (empty($availableJournal)): ?>
+            <p>No journal entries available</p>
+        <?php else: ?>
+            <?php foreach ($availableJournal as $journal): ?>
+                <div class="card mb-3" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($journal["title"]) ?></h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <?= date('d.m.Y', strtotime($journal['created_at'])) ?>
+                        </h6>
+                        <p class="card-text"><?= nl2br(htmlspecialchars($journal["description"])) ?></p>
+                        <a href="#" class="card-link">Read more...</a>
+
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <div class="col-lg-3">
