@@ -1,17 +1,26 @@
-<div class="container text-center">
-<h2>Create an Account</h2>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow" style="max-width: 400px; width: 100%;">
+    <h2 class="text-center mb-4">Create an Account</h2>
 
-<div class="row justify-content-center">
-    <div class="forms col-8">
-<form action="?controller=auth&action=doRegister" method="post">
-    <input class="mb-3" type="text" name="username" placeholder="Username" required>
-    <input class="mb-3" type="email" name="email" placeholder="E-Mail" required>
-    <input class="mb-3" type="password" name="password" placeholder="Password" required>
-    <button type="submit">Create Account</button>
-</form>
+    <?php if (!empty($error)) : ?>
+      <div class="alert alert-danger"><?= $error ?></div>
+    <?php endif; ?>
 
-<a href="?controller=auth&action=login">Back to login</a>
+    <form action="?controller=auth&action=doRegister" method="post">
+      <div class="mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Username" required>
+      </div>
+      <div class="mb-3">
+        <input type="email" name="email" class="form-control" placeholder="E-Mail" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+    </form>
 
-    </div>
-</div>
+    <p class="text-center mt-3">
+      <a href="?controller=auth&action=login">Back to login</a>
+    </p>
+  </div>
 </div>

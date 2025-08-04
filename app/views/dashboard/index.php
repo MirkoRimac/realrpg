@@ -1,164 +1,129 @@
-<div class="container-fluid">
+<div class="container-fluid px-3">
 
-<h1 class="header text-center m-3">Real RPG</h1>
+  <h1 class="text-center my-4">Real RPG</h1>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-3">
-        <img class="avatar" src="../assets/images/avatar.jpg">
-        <!-- <div class="level text-center">
-            <p>Level 217</p>
-            <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar text-bg-info" style="width: 75%">75%</div>
-            </div>
-            <p>500 / 12000 XP⭐</p>
-        </div> -->
+  <div class="row g-4">
+    
+    <!-- Sidebar / Avatar & User Info -->
+    <div class="col-12 col-lg-3 order-lg-1">
+      <div class="card text-center">
+        <img class="card-img-top img-fluid rounded" src="../assets/images/avatar.jpg" alt="Avatar" style="max-height: 300px; object-fit: cover;">
 
-        <?php
+        <div class="card-body">
+          <?php
             require_once "../app/helpers/xp.php";
             $xpNeeded = xpForNextLevel($user["level"]);
             $percent = ($user["xp"] / $xpNeeded) * 100;
-        ?>
-        <div class="level text-center">
-            <p>Level <?php echo htmlspecialchars($user["level"]); ?></p>
-            <p><? htmlspecialchars($user["level"]); ?></p>
-            <div class="progress">
-                <div class="progress-bar" style="width: <?= $percent ?>%"><?= round($percent) ?>%</div>
+          ?>
+          <h5>Level <?= htmlspecialchars($user["level"]) ?></h5>
+          <div class="progress mb-2" style="height: 20px;">
+            <div class="progress-bar bg-success" style="width: <?= $percent ?>%">
+              <?= round($percent) ?>%
             </div>
-            <p><?= $user["xp"] ?> / <?= $xpNeeded ?> XP</p>
+          </div>
+          <p><?= $user["xp"] ?> / <?= $xpNeeded ?> XP</p>
+          <hr>
+          <p>Name: <?= htmlspecialchars($user["username"]) ?></p>
+          <p>Class: Mage</p>
+          <p>Race: Night Elf</p>
         </div>
-        <div class="userInfo">
-            <p>Name: Mörko</p>
-            <p>Class: Mage</p>
-            <p>Race: Night Elf</p>
-        </div>
+      </div>
     </div>
 
-    <div class="col-lg-6">
-      <!-- <h2>Active Quests</h2> -->
+    <!-- Main Content: Quests + Journal -->
+    <div class="col-12 col-lg-6 order-lg-2">
 
-      <!-- <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Status</th>
-            <th scope="col">Category</th>
-            <th scope="col">Reward</th>
-            <th scope="col">XP</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <th scope="row">Do the dishes</th>
-            <td>In Progress</td>
-            <td>Daily Quest</td>
-            <td>10 Gold</td>
-            <td>50 XP</td>
-            </tr>
-            <tr>
-            <th scope="row">Family time</th>
-            <td>In Progress</td>
-            <td>Daily Quest</td>
-            <td>15 Gold</td>
-            <td>100 XP</td>
-            </tr>
-            <tr>
-            <th scope="row">Academy</th>
-            <td>In Progress</td>
-            <td>Main Quest</td>
-            <td>15 Gold</td>
-            <td>100 XP</td>
-            </tr>
-        </tbody>
-        </table> -->
+      <!-- Active Quests -->
+      <section class="mb-5">
+        <h2 class="mb-3">Active Quests</h2>
 
-        <section class="quests">
-            <h2>Aktive Quests</h2>
-            <?php if (empty($quests)): ?>
-                <p>Keine aktiven Quests</p>
-            <?php else: ?>
-                <div class="quest-list">
-                <?php foreach ($quests as $quest): ?>
-                    <div class="quest-card">
-                    <h4><?= htmlspecialchars($quest["title"]) ?></h4>
-                    <p><strong>Status:</strong> <?= $quest['is_active'] ? "Aktiv" : "Inaktiv" ?></p>
-                    <p><strong>Reward:</strong> <?= $quest["reward"] ?> Gold</p>
-                    <p><strong>XP:</strong> <?= $quest["xp"] ?> XP</p>
-                    <p><strong>Erstellt:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
+        <?php if (empty($quests)): ?>
+          <p>No active quests</p>
+        <?php else: ?>
+          <div class="d-grid gap-3">
+            <?php foreach ($quests as $quest): ?>
+              <div class="card">
+                <div class="card-body">
+                  <h5><?= htmlspecialchars($quest["title"]) ?></h5>
+                  <p><strong>Status:</strong> <?= $quest['is_active'] ? "Aktiv" : "Inaktiv" ?></p>
+                  <p>
+                    <span class="badge bg-success">Aktiv</span>
+                  </p>
+                  <p><strong>Reward:</strong> 🪙 <?= $quest["reward"] ?> Gold</p>
+                  <p><strong>XP:</strong> ⭐ <?= $quest["xp"] ?> XP</p>
+                  <p><strong>Erstellt:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
 
-                    <div class="quest-buttons">
-                        <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" class="btn btn-success">✔ Erledigt</a>
-
-                        <form method="POST" action="?controller=quest&action=toggleStatus">
-                        <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
-                        <input type="hidden" name="is_active" value="0">
-                        <button type="submit" class="btn btn-warning">✖ Cancel</button>
-                        </form>
-                    </div>
-                    </div>
-                <?php endforeach; ?>
+                  <div class="d-flex flex-column flex-md-row gap-2 mt-3">
+                    <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" class="btn btn-success w-100"><i class="bi bi-check-circle-fill"></i> Done</a>
+                    <form method="POST" action="?controller=quest&action=toggleStatus" class="w-100 w-md-auto">
+                      <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                      <input type="hidden" name="is_active" value="0">
+                      <button class="btn btn-danger w-100"><i class="bi bi-x-circle-fill"></i> Cancel</button>
+                    </form>
+                  </div>
                 </div>
-            <?php endif; ?>
-            </section>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </section>
 
+      <!-- Journal -->
+      <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="mb-0">Journal</h2>
+          <a href="?controller=journal&action=create" class="btn btn-success btn-sm">Add Entry</a>
+        </div>
 
-        <!-- Journal Area -->
-        <h2 class="mt-5">Journal</h2>
-        <a href="?controller=journal&action=create" class="add_entry_btn">Add Entry</a>
-        
         <?php if (empty($availableJournal)): ?>
-            <p>No journal entries available</p>
+          <p>No journal entries available</p>
         <?php else: ?>
-            <?php foreach ($availableJournal as $journal): ?>
-                <div class="card mb-3" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($journal["title"]) ?></h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">
-                            <?= date('d.m.Y', strtotime($journal['created_at'])) ?>
-                        </h6>
-                        <p class="card-text"><?= nl2br(htmlspecialchars($journal["description"])) ?></p>
-                        <a href="#" class="card-link">Read more...</a>
-
-                    </div>
-                </div>
-            <?php endforeach; ?>
+          <?php foreach ($availableJournal as $journal): ?>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title"><?= htmlspecialchars($journal["title"]) ?></h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <?= date('d.m.Y', strtotime($journal['created_at'])) ?>
+                </h6>
+                <p class="card-text"><?= nl2br(htmlspecialchars($journal["description"])) ?></p>
+                <a href="#" class="card-link">Read more...</a>
+              </div>
+            </div>
+          <?php endforeach; ?>
         <?php endif; ?>
+      </section>
     </div>
 
-    <div class="col-lg-3">
-        <h2>Available Quests</h2>
-        <a href="?controller=quest&action=create" class="add_entry_btn">Add Quest</a>
+    <!-- Right Column: Available Quests -->
+    <div class="col-12 col-lg-3 order-lg-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Available Quests</h2>
+        <a href="?controller=quest&action=create" class="btn btn-success btn-sm">Add</a>
+      </div>
 
-        <?php if (empty($availableQuests)): ?>
-            <p>Keine verfügbaren Quests</p>
-        <?php else: ?>
-            <?php foreach ($availableQuests as $quest): ?>
-                <div class="card mb-3" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($quest["title"]) ?></h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">
-                            <?= date('d.m.Y', strtotime($quest['created_at'])) ?>
-                        </h6>
-                        <ul>
-                            <li><p class="card-text">Belohnung: <?= $quest["reward"] ?> Gold</p></li>
-                            <li><p class="card-text">XP: <?= $quest["xp"] ?> XP</p></li>
-                        </ul>
-                        <p class="card-text"><?= nl2br(htmlspecialchars($quest["description"])) ?></p>
-                        <a href="#" class="card-link">Read more...</a>
-
-                        <form method="POST" action="?controller=quest&action=toggleStatus">
-                            <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
-                            <input type="hidden" name="is_active" value="1">
-                            <button type="submit" class="btn btn-success btn-sm">Activate</button>
-                        </form>
-
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+      <?php if (empty($availableQuests)): ?>
+        <p>No quests available</p>
+      <?php else: ?>
+        <?php foreach ($availableQuests as $quest): ?>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><?= htmlspecialchars($quest["title"]) ?></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><?= date('d.m.Y', strtotime($quest['created_at'])) ?></h6>
+              <ul class="mb-2">
+                <li><strong>Belohnung: 🪙 </strong> <?= $quest["reward"] ?> Gold</li>
+                <li><strong>XP: ⭐ </strong> <?= $quest["xp"] ?> XP</li>
+              </ul>
+              <p><?= nl2br(htmlspecialchars($quest["description"])) ?></p>
+              <form method="POST" action="?controller=quest&action=toggleStatus">
+                <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                <input type="hidden" name="is_active" value="1">
+                <button type="submit" class="btn btn-success btn-sm w-100">Activate</button>
+              </form>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
     </div>
-
+    
   </div>
-</div>
-
 </div>

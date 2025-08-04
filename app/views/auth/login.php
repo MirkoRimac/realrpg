@@ -1,17 +1,23 @@
-<div class="container text-center">
-<h2>Login</h2>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow" style="max-width: 400px; width: 100%;">
+    <h2 class="text-center mb-4">Login</h2>
 
-<div class="row justify-content-center">
-<div class="forms col-8">
+    <?php if (!empty($error)) : ?>
+      <div class="alert alert-danger"><?= $error ?></div>
+    <?php endif; ?>
 
-<?php if (!empty($error)) echo '<p style="color:red;">' . $error . "</p>"; ?>
-<form action="?controller=auth&action=doLogin" method="post">
-    <input class="mb-3" type="email" name="email" placeholder="E-Mail" required>
-    <input class="mb-3" type="password" name="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
+    <form action="?controller=auth&action=doLogin" method="post">
+      <div class="mb-3">
+        <input type="email" name="email" class="form-control" placeholder="E-Mail" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+    </form>
 
-<a href="?controller=auth&action=register">No Account? Register now!</a>
-</div>
-</div>
+    <p class="text-center mt-3">
+      <a href="?controller=auth&action=register">No account? Register now!</a>
+    </p>
+  </div>
 </div>
