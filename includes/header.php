@@ -9,12 +9,22 @@
     <title>Real RPG</title>
 </head>
 <body class="d-flex flex-column h-100">
-<nav class="container-fluid">
-    <a href="?controller=dashboard&action=index">Dashboard</a>
-    <a href="?controller=quest&action=index">Quests</a>
 
-    <a href="?controller=auth&action=register">Register</a>
-    <a href="?controller=auth&action=login">Login</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-surface border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" style="color: #0097B2;" href="?controller=dashboard&action=index">🧙 RealRPG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <a href="?controller=auth&action=logout">Logout</a>
-</nav>    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="?controller=dashboard&action=index">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="?controller=quest&action=index">Quests</a></li>
+        <li class="nav-item"><a class="nav-link" href="?controller=auth&action=register">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="?controller=auth&action=login">Login</a></li>
+        <li class="nav-item"><a class="nav-link text-accent" href="?controller=auth&action=logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

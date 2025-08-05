@@ -29,4 +29,14 @@ class User extends Model
         $stmt->execute([$xp, $level, $userId]);
     }
 
+    public function updateAvatar($userId, $race, $class, $backstory, $skinColor, $clothesColor)
+    {
+        $stmt = $this->pdo->prepare("
+            UPDATE users
+            SET race = ?, class = ?, backstory = ?, skin_color = ?, clothes_color = ?
+            WHERE id = ?
+        ");
+        $stmt->execute([$race, $class, $backstory, $skinColor, $clothesColor, $userId]);
+    }
+
 }

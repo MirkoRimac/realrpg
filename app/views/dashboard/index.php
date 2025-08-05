@@ -7,7 +7,28 @@
     <!-- Sidebar / Avatar & User Info -->
     <div class="col-12 col-lg-3 order-lg-1">
       <div class="card text-center">
-        <img class="card-img-top img-fluid rounded" src="../assets/images/avatar.jpg" alt="Avatar" style="max-height: 300px; object-fit: cover;">
+        <!-- <img class="card-img-top img-fluid rounded" src="../assets/images/avatar.jpg" alt="Avatar" style="max-height: 300px; object-fit: cover;"> -->
+
+        <h3>Preview</h3>
+        <canvas id="avatarCanvas" width="64" height="64" style="image-rendering: pixelated;"></canvas>
+        <!-- <script>
+        const avatarOptions = {
+            race: 'Elf', // Human, Orc, Elf
+            skinColor: '#d1a38d',
+            clothesColor: '#1f3b4d'
+        };
+        </script> -->
+        <script src="js/avatarRenderer.js"></script>
+
+        <script>
+            // Werte aus PHP an JS übergeben (sicher escapen!)
+            const race = '<?= htmlspecialchars($user["race"] ?? '') ?>';
+            const klass = '<?= htmlspecialchars($user["class"] ?? '') ?>';
+
+            if (race && klass) {
+                drawAvatar(race, klass);
+            }
+        </script>
 
         <div class="card-body">
           <?php
@@ -15,7 +36,7 @@
             $xpNeeded = xpForNextLevel($user["level"]);
             $percent = ($user["xp"] / $xpNeeded) * 100;
           ?>
-          <h5>Level <?= htmlspecialchars($user["level"]) ?></h5>
+          <h4>Level <?= htmlspecialchars($user["level"]) ?></h5>
           <div class="progress mb-2" style="height: 20px;">
             <div class="progress-bar bg-success" style="width: <?= $percent ?>%">
               <?= round($percent) ?>%
@@ -23,9 +44,15 @@
           </div>
           <p><?= $user["xp"] ?> / <?= $xpNeeded ?> XP</p>
           <hr>
-          <p>Name: <?= htmlspecialchars($user["username"]) ?></p>
-          <p>Class: Mage</p>
-          <p>Race: Night Elf</p>
+
+          <?php if ($user["class"] && $user["race"]): ?>
+                <h4>Your Avatar</h5>
+                <p>Name: <?= htmlspecialchars($user["username"]) ?></p>
+                <p><strong>Class:</strong> <?= htmlspecialchars($user["class"]) ?></p>
+                <p><strong>Race:</strong> <?= htmlspecialchars($user["race"]) ?></p>
+                <p><strong>Backstory:</strong><br> <?= nl2br(htmlspecialchars($user["backstory"])) ?></p>
+            <?php endif; ?>
+
         </div>
       </div>
     </div>
@@ -45,13 +72,12 @@
               <div class="card">
                 <div class="card-body">
                   <h5><?= htmlspecialchars($quest["title"]) ?></h5>
-                  <p><strong>Status:</strong> <?= $quest['is_active'] ? "Aktiv" : "Inaktiv" ?></p>
-                  <p>
-                    <span class="badge bg-success">Aktiv</span>
-                  </p>
+                  <!-- <p><strong>Status:</strong> <?= $quest['is_active'] ? "Aktiv" : "Inaktiv" ?></p> -->
+                  <p><strong>Status:</strong> <?= $quest['is_active'] ? '<span class="badge bg-success">Aktiv</span>' : "Inaktiv" ?></p>
                   <p><strong>Reward:</strong> 🪙 <?= $quest["reward"] ?> Gold</p>
                   <p><strong>XP:</strong> ⭐ <?= $quest["xp"] ?> XP</p>
-                  <p><strong>Erstellt:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
+                  <p><strong>Created:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
+                  <p><strong>Due date:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
 
                   <div class="d-flex flex-column flex-md-row gap-2 mt-3">
                     <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" class="btn btn-success w-100"><i class="bi bi-check-circle-fill"></i> Done</a>

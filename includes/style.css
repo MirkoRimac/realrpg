@@ -3,18 +3,40 @@
     src: url("../assets/fonts/clacon2.ttf");
 }
 
-:root {
+/* :root {
   --color-primary: #0097B2;
   --color-accent: #D72D2D;
   --color-bg: #1e1e1e;
   --color-surface: #2a2a2a;
   --radius: 12px;
   --font-main: "Console", monospace;
+} */
+
+:root {
+  --color-primary: #0097B2;
+  --color-primary-dark: #00718b;
+  --color-accent: #D72D2D;
+  --color-accent-dark: #b91c1c;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+
+  --color-bg: #1e1e1e;
+  --color-surface: #2a2a2a;
+  --color-surface-light: #333;
+
+  --text-color: #ffffff;
+  --text-muted: #aaaaaa;
+
+  --radius: 12px;
+  --font-main: "Console", monospace;
 }
+
 
 body {
     font-family: "Console";
-    font-family: var(--font-main);
+    /* font-family: var(--font-main); */
+    font-family: var(--font-main), "Inter", sans-serif;
     background-color: var(--color-bg);
     color: white;
 }
@@ -226,6 +248,39 @@ form {
 }
 
 /* New Quests End */
+
+/* Navbar */
+
+.bg-surface {
+  background-color: var(--color-surface) !important;
+}
+
+.navbar .nav-link {
+  color: white !important;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out, background-color 0.2s;
+  border-radius: var(--radius);
+  padding: 6px 12px;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  background-color: var(--color-primary);
+  color: black !important;
+  outline: none;
+}
+
+.navbar .nav-link.text-accent {
+  color: var(--color-accent) !important;
+}
+
+.navbar .nav-link.text-accent:hover {
+  background-color: var(--color-accent);
+  color: black !important;
+}
+
+
+/* Navbar End*/
 
 /* Media Queries */
 

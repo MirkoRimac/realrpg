@@ -35,7 +35,13 @@ class AuthController extends Controller
     {
         $userModel = new User();
         $userModel->create($_POST["username"], $_POST["email"], $_POST["password"]);
-        header("Location: ?controller=dashboard&action=index");
+
+        $user = $userModel->findByEmail($_POST["email"]);
+        
+        session_start();
+        $_SESSION["user_id"] = $user["id"];
+
+        header("Location: ?controller=avatar&action=create");
     }
 
     public function logout()
