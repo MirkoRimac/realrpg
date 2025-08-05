@@ -11,25 +11,19 @@
 
         <h3>Preview</h3>
         <canvas id="avatarCanvas" width="64" height="64" style="image-rendering: pixelated;"></canvas>
-        <!-- <script>
-        const avatarOptions = {
-            race: 'Elf', // Human, Orc, Elf
-            skinColor: '#d1a38d',
-            clothesColor: '#1f3b4d'
-        };
-        </script> -->
+
         <script src="js/avatarRenderer.js"></script>
-
         <script>
-            // Werte aus PHP an JS übergeben (sicher escapen!)
-            const race = '<?= htmlspecialchars($user["race"] ?? '') ?>';
-            const klass = '<?= htmlspecialchars($user["class"] ?? '') ?>';
-
-            if (race && klass) {
-                drawAvatar(race, klass);
-            }
+            document.addEventListener('DOMContentLoaded', () => {
+                const userRace = <?= json_encode($user["race"]) ?>;
+                const userClass = <?= json_encode($user["class"]) ?>;
+                drawAvatar(userRace, userClass);
+            });
         </script>
 
+
+
+        
         <div class="card-body">
           <?php
             require_once "../app/helpers/xp.php";

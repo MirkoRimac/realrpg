@@ -32,7 +32,6 @@
   --font-main: "Console", monospace;
 }
 
-
 body {
     font-family: "Console";
     /* font-family: var(--font-main); */
