@@ -470,6 +470,14 @@ form {
   font-size: 2rem;
 }
 
+.hero-text h2,
+.hero-text p,
+.hero-text span {
+  /* -webkit-text-stroke: 1px white; */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+
 
 @keyframes fadeInUp {
   from {
@@ -515,6 +523,13 @@ form {
   .hero-text a {
     font-size: 1rem;
     padding: 10px 20px;
+  }
+
+  .hero-text h2,
+  .hero-text p,
+  .hero-text span {
+    /* -webkit-text-stroke: 1px white; */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
   }
 }
 
