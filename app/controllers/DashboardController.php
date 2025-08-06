@@ -42,14 +42,10 @@ class DashboardController extends Controller
             "availableJournal" => $availableJournal,
             "user" => $user
         ]);
+    }
 
-        // $this->view("dashboard/index", ["dashboard" => $dashboard]);
-
-
-        //  // Quest Model laden
+    public function test()
+    {
         
-
-        // // Daten an die View übergeben
-        // $this->view('dashboard/index', ['quests' => $quests]);
     }
 }

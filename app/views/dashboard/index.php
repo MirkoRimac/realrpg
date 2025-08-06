@@ -1,5 +1,4 @@
 <!-- Limitiere angezeigte Wörter -->
-
 <?php
 function limitWords($text, $limit = 100) {
   $words = preg_split('/\s+/', strip_tags($text));
@@ -10,20 +9,30 @@ function limitWords($text, $limit = 100) {
 }
 ?>
 
-
 <div class="container-fluid px-3">
 
   <h1 class="text-center my-4">Real RPG</h1>
 
   <div class="row g-4">
     
-    <!-- Sidebar / Avatar & User Info -->
+<!-- Sidebar / Avatar & User Info -->
     <div class="col-12 col-lg-3 order-lg-1">
       <div class="card text-center">
-        <!-- <img class="card-img-top img-fluid rounded" src="../assets/images/avatar.jpg" alt="Avatar" style="max-height: 300px; object-fit: cover;"> -->
+<!-- <img class="card-img-top img-fluid rounded" src="../assets/images/avatar.jpg" alt="Avatar" style="max-height: 300px; object-fit: cover;"> -->
 
         <h3>Preview</h3>
-        <canvas id="avatarCanvas" width="64" height="64" style="image-rendering: pixelated;"></canvas>
+        <canvas id="avatarCanvas" 
+                width="64" 
+                height="64" 
+                style="image-rendering: pixelated; cursor: pointer;"
+                class="avatar-click"
+                data-username="<?= htmlspecialchars($user['username']) ?>"
+                data-class="<?= htmlspecialchars($user['class']) ?>"
+                data-race="<?= htmlspecialchars($user['race']) ?>"
+                data-level="<?= htmlspecialchars($user['level']) ?>"
+                data-xp="<?= htmlspecialchars($user['xp']) ?>"
+                data-backstory="<?= htmlspecialchars($user['backstory']) ?>">
+        </canvas>
 
         <script src="js/avatarRenderer.js"></script>
         <script>
@@ -52,9 +61,7 @@ function limitWords($text, $limit = 100) {
           <p><?= $user["xp"] ?> / <?= $xpNeeded ?> XP</p>
           <hr>
 
-          <!-- Limitiere die angezeigten Wörter -->
-
-
+<!-- Limitiere die angezeigten Wörter -->
           <?php if ($user["class"] && $user["race"]): ?>
                 <h4>Your Avatar</h5>
                 <p>Name: <?= htmlspecialchars($user["username"]) ?></p>
@@ -67,10 +74,10 @@ function limitWords($text, $limit = 100) {
       </div>
     </div>
 
-    <!-- Main Content: Quests + Journal -->
+<!-- Main Content: Quests + Journal -->
     <div class="col-12 col-lg-6 order-lg-2">
 
-      <!-- Active Quests -->
+<!-- Active Quests -->
       <section class="mb-5">
         <h2 class="mb-3">Active Quests</h2>
 
@@ -110,7 +117,7 @@ function limitWords($text, $limit = 100) {
         <?php endif; ?>
       </section>
 
-      <!-- Journal -->
+<!-- Journal -->
       <section>
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h2 class="mb-0">Journal</h2>
@@ -140,7 +147,7 @@ function limitWords($text, $limit = 100) {
       </section>
     </div>
 
-    <!-- Right Column: Available Quests -->
+<!-- Right Column: Available Quests -->
     <div class="col-12 col-lg-3 order-lg-3">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Available Quests</h2>

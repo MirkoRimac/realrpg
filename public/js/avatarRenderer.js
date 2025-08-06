@@ -42,6 +42,3 @@ function drawCharacter(race, klass) {
         spriteWidth * 2, spriteHeight * 2 // Ziel w,h (4x Zoom)
     );
 }
-
-// global für dein Dashboard zugänglich machen
-window.drawAvatar = drawAvatar;

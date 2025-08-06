@@ -9,10 +9,10 @@
     <title>Real RPG</title>
 </head>
 <body class="d-flex flex-column h-100">
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-surface border-bottom">
+<!-- bg-surface border-bottom -->
+<nav class="navbar navbar-expand-lg navbar-dark transparent-navbar"> 
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" style="color: #0097B2;" href="?controller=dashboard&action=index">🧙 RealRPG</a>
+    <a class="navbar-brand fw-bold" style="color: #0097B2;" href="?controller=home&action=index">🧙 RealRPG</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>

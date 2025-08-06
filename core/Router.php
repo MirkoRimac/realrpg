@@ -5,7 +5,7 @@ class Router
 
     public function handleRequest()
     {
-        $controller = $_GET["controller"] ?? "quest";
+        $controller = $_GET["controller"] ?? "home";
         $action = $_GET["action"] ?? "index";
 
         $controllerName = ucfirst($controller) . "Controller";
