@@ -1,29 +1,32 @@
-# 🎮 Real RPG – PHP Web App
+# RPG Tracker
 
-**Real RPG** ist eine spielerische Webanwendung, die alltägliche Aufgaben in Quests verwandelt – 
-inspiriert von Rollenspielen (RPGs). Diese App unterstützt dich dabei, deine Ziele zu verfolgen, 
-deine Fortschritte sichtbar zu machen und dabei ein echtes Gefühl von Abenteuer im Alltag zu erleben.
+This started as a small project — I just wanted to build a simple ToDo list for fun.  
+But then I thought, "What if I made it look more like a game?"  
+Then it escalated. Fast.
 
-> ✅ Entwickelt im Rahmen einer Umschulung zum Fachinformatiker für Anwendungsentwicklung  
-> ⚙️ Tech Stack: PHP (OOP, MVC), MySQL, HTML, CSS, JavaScript
+Now it's a full-blown RPG-style quest tracker with characters, active quests, progress bars, and a fantasy UI.  
+It's still growing and evolving, and probably way more than I originally intended. But hey, it's been a fun ride.
 
----
+Feel free to explore, break things, and maybe even use it.
 
-## 🚀 Features
+## Features
 
-- Benutzerregistrierung & Login (Sessions)
-- Dashboard mit Nutzerprofil, XP-Level, Fortschrittsbalken
-- Aktive Quests (erledigte Aufgaben)
-- Verfügbare Quests (noch nicht gestartete Aufgaben)
-- Journal zum Festhalten persönlicher Einträge
-- Quests können aktiviert, deaktiviert, erstellt und verwaltet werden
-- Sicheres Datenhandling durch PDO (Prepared Statements)
+- Register and log in as a user
+- Create and track quests (aka ToDos)
+- Level system (because why not)
+- Progress bars and user stats
+- Active quests dashboard
+- Animated hero video on homepage
+- Retro-style design using custom fonts
 
----
+## Stack
 
-## 🧠 Tech Stack & Struktur
+- PHP (Vanilla)
+- MySQL
+- Bootstrap (for basic layout)
+- Custom CSS
 
-- **Backend:** PHP (OOP + MVC)
-- **Frontend:** HTML, CSS (Bootstrap), JavaScript
-- **Datenbank:** MySQL (2 Tabellen: `users`, `quests`) (Aktuell)
+## Warning
 
+This code isn't perfect. Some parts are messy. Some parts are kinda cool.  
+It’s a side project that got out of hand — and I’m totally okay with that.
