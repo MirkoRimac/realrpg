@@ -380,7 +380,144 @@ form {
 
 /* Overlay End */
 
+/* Hero Video */
+
+.hero-text h2,
+.hero-text p,
+.hero-text a,
+.hero-text img {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+.hero-video-container {
+  /* position: absolute; */
+  position: absolute;
+  width: 100%;
+  height: 100vh; /* Volle Bildschirmhöhe */
+  overflow: hidden;
+}
+
+.hero-video-container .hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Video füllt Container aus */
+  z-index: 1;
+}
+
+.hero-video-container .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.45); */ /* Verdunkelung für Lesbarkeit */
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.hero-video-container .hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  font-size: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 1rem; */
+  gap: 0.2rem;
+}
+
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -100%);
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  /* font-size: 3.5rem; */
+  font-size: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 1rem; */
+  gap: 0.2rem;
+}
+
+.hero-text > h2 {
+  /* font-size: 3.5rem; */
+  font-size: 4rem;
+
+}
+
+.hero-text > p {
+  /* font-size: 3.5rem; */
+  font-size: 4rem;
+
+}
+
+.hero-text > span {
+  font-size: 2rem;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-title {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+/* .fade-in-title:nth-child(1) { transform: translateX(-350px) !important; }
+.fade-in-title:nth-child(2) { transform: translateX(-90px) !important; }
+.fade-in-title:nth-child(3) { transform: translateX(8px); }
+.fade-in-title:nth-child(4) { transform: translateX(-5px); }
+.fade-in-title:nth-child(5) { transform: translateX(12px); } */
+
+
+/* Hero Video End */
+
 /* Media Queries */
+
+@media (max-width: 768px) {
+  .hero-text h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero-text p {
+    font-size: 2.2rem;
+  }
+
+  .herro-text span {
+    font-size: 0.5rem;
+  }
+
+  .hero-text a {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
 
 @media (max-width: 768px) {
   .avatar {
