@@ -1,4 +1,4 @@
-# RPG Tracker
+# RealRPG
 
 This started as a small project — I just wanted to build a simple ToDo list for fun.  
 But then I thought, "What if I made it look more like a game?"  
