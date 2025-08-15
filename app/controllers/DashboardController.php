@@ -7,12 +7,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        session_start();
-        if (!isset($_SESSION["user_id"]))
-        {
-            header("Location: ?controller=auth&action=login");
-            exit;
-        }
 
         $user_id = $_SESSION["user_id"];
 

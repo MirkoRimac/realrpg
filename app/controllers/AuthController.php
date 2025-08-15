@@ -48,6 +48,6 @@ class AuthController extends Controller
     {
         session_start();
         session_destroy();
-        header("Location: ?controller=auth&action=login");
+        header("Location: ?controller=home&action=index");
     }
 }
