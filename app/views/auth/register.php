@@ -16,7 +16,7 @@
       <div class="mb-3">
         <input type="password" name="password" class="form-control" placeholder="Password" required>
       </div>
-      <button type="submit" class="btn btn-success w-100">Login</button>
+      <button type="submit" class="btn btn-success w-100">Create new Account</button>
     </form>
 
     <p class="text-center mt-3">

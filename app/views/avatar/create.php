@@ -39,7 +39,7 @@
             <textarea name="backstory" class="form-control" rows="4" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save Avatar</button>
+        <button type="submit" class="btn btn-success">Save Avatar</button>
     </form>
   </div>
 </div>

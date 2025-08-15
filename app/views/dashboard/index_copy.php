@@ -17,16 +17,9 @@ function limitWords($text, $limit = 100) {
     
 <!-- Sidebar / Avatar & User Info -->
     <div class="col-12 col-lg-3 order-lg-1">
-      <div class="avatar-card"
-            data-name="<?= htmlspecialchars($user["username"]) ?>"
-            data-race="<?= htmlspecialchars($user["race"]) ?>"
-            data-class="<?= htmlspecialchars($user["class"]) ?>"
-            data-backstory="<?= nl2br(htmlspecialchars($user["backstory"])) ?>"
-            data-gold="<?= nl2br(htmlspecialchars($user["gold"])) ?>"
-            data-xp="<?= nl2br(htmlspecialchars($user["xp"])) ?>">
       <div class="card text-center">
 <!-- <img class="card-img-top img-fluid rounded" src="../assets/images/avatar.jpg" alt="Avatar" style="max-height: 300px; object-fit: cover;"> -->
-      <div class="avatar-card"></div>
+
         <h3>Your Avatar</h3>
         <canvas id="avatarCanvas" 
                 width="64" 
@@ -52,7 +45,7 @@ function limitWords($text, $limit = 100) {
 
 
 
-<!-- Level Anzeige und Progress Bar -->
+        
         <div class="card-body">
           <?php
             require_once "../app/helpers/xp.php";
@@ -68,16 +61,15 @@ function limitWords($text, $limit = 100) {
           <p><?= $user["xp"] ?> / <?= $xpNeeded ?> XP</p>
           <hr>
 
-<!-- Daten zum Avatar -->
-          
+<!-- Limitiere die angezeigten Wörter -->
           <?php if ($user["class"] && $user["race"]): ?>
                 <h4>Your Avatar</h5>
                 <p>Name: <?= htmlspecialchars($user["username"]) ?></p>
-                <p><strong>Race:</strong> <?= htmlspecialchars($user["race"]) ?></p>
                 <p><strong>Class:</strong> <?= htmlspecialchars($user["class"]) ?></p>
+                <p><strong>Race:</strong> <?= htmlspecialchars($user["race"]) ?></p>
                 <p><strong>Backstory:</strong><br> <?= nl2br(htmlspecialchars(limitWords($user["backstory"], 20))) ?></p>
             <?php endif; ?>
-            </div>
+
         </div>
       </div>
     </div>
@@ -86,50 +78,44 @@ function limitWords($text, $limit = 100) {
     <div class="col-12 col-lg-6 order-lg-2">
 
 <!-- Active Quests -->
-    <section class="mb-5">
-    <h2 class="mb-3">Active Quests</h2>
+      <section class="mb-5">
+        <h2 class="mb-3">Active Quests</h2>
 
-    <?php if (empty($quests)): ?>
-        <p>No active quests</p>
-    <?php else: ?>
-        <div class="row g-3"> <!-- Bootstrap Row mit Gap -->
+        <?php if (empty($quests)): ?>
+          <p>No active quests</p>
+        <?php else: ?>
+          <div class="d-grid gap-3">
             <?php foreach ($quests as $quest): ?>
-                <div class="col-12 col-lg-6"> <!-- 1 Spalte auf klein, 2 Spalten ab lg -->
-                    <div class="card quest-card h-100"
-                        data-title="<?= htmlspecialchars($quest["title"]) ?>"
-                        data-description="<?= htmlspecialchars($quest["description"] ?? 'No description') ?>"
-                        data-reward="<?= $quest["reward"] ?>"
-                        data-xp="<?= $quest["xp"] ?>"
-                        data-created="<?= date('d.m.Y', strtotime($quest['created_at'])) ?>"
-                        data-due="<?= date('d.m.Y', strtotime($quest['due_date'] ?? $quest['created_at'])) ?>">
-                        
-                        <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars($quest["title"]) ?></h5>
-                            <p><span class="quest-label">Status:</span> 
-                                <?= $quest['is_active'] ? '<span class="badge bg-success">Active</span>' : "Not active" ?>
-                            </p>
-                            <p><span class="quest-label">Reward:</span> 🪙 <span class="quest-value"><?= $quest["reward"] ?> Gold</span></p>
-                            <p><span class="quest-label">XP:</span> ⭐ <?= $quest["xp"] ?> XP</p>
-                            <p><span class="quest-label">Created:</span> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
-                            <p><span class="quest-label">Due date:</span> <?= date('d.m.Y', strtotime($quest['due_date'] ?? $quest['created_at'])) ?></p>
+              <div class="card quest-card mb-3"
+                  data-title="<?= htmlspecialchars($quest["title"]) ?>"
+                  data-description="<?= htmlspecialchars($quest["description"] ?? 'No description') ?>"
+                  data-reward="<?= $quest["reward"] ?>"
+                  data-xp="<?= $quest["xp"] ?>"
+                  data-created="<?= date('d.m.Y', strtotime($quest['created_at'])) ?>"
+                  data-due="<?= date('d.m.Y', strtotime($quest['due_date'] ?? $quest['created_at'])) ?>">
+                <div class="card-body">
+                  <h5 class="card-title"><?= htmlspecialchars($quest["title"]) ?></h5>
+                  <p><strong>Status:</strong> <?= $quest['is_active'] ? '<span class="badge bg-success">Aktiv</span>' : "Inaktiv" ?></p>
+                  <p><strong>Reward:</strong> 🪙 <?= $quest["reward"] ?> Gold</p>
+                  <p><strong>XP:</strong> ⭐ <?= $quest["xp"] ?> XP</p>
+                  <p><strong>Created:</strong> <?= date('d.m.Y', strtotime($quest['created_at'])) ?></p>
+                  <p><strong>Due date:</strong> <?= date('d.m.Y', strtotime($quest['due_date'] ?? $quest['created_at'])) ?></p>
 
-                            <div class="d-flex flex-column flex-md-row gap-2 mt-3">
-                                <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" 
-                                   class="btn btn-success w-100">✔ Done</a>
-                                <form method="POST" action="?controller=quest&action=toggleStatus" class="w-100 w-md-auto">
-                                    <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
-                                    <input type="hidden" name="is_active" value="0">
-                                    <button class="btn btn-danger w-100">✖ Cancel</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                  <div class="d-flex flex-column flex-md-row gap-2 mt-3">
+                    <a href="?controller=quest&action=complete&id=<?= $quest['id'] ?>" class="btn btn-success w-100">✔ Done</a>
+                    <form method="POST" action="?controller=quest&action=toggleStatus" class="w-100 w-md-auto">
+                      <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
+                      <input type="hidden" name="is_active" value="0">
+                      <button class="btn btn-danger w-100">✖ Cancel</button>
+                    </form>
+                  </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-</section>
+              </div>
+          <?php endforeach; ?>
 
+          </div>
+        <?php endif; ?>
+      </section>
 
 <!-- Journal -->
       <section>
@@ -144,14 +130,14 @@ function limitWords($text, $limit = 100) {
           <?php foreach ($availableJournal as $journal): ?>
             <div class="card journal-card mb-3"
                 data-title="<?= htmlspecialchars($journal["title"]) ?>"
-                data-description="<?= htmlspecialchars($journal["description"]) ?>"
+                data-description="<?= htmlspecialchars(limitWords($journal["description"], 20)) ?>"
                 data-created="<?= date('d.m.Y', strtotime($journal['created_at'])) ?>">
               <div class="card-body">
                 <h5 class="card-title"><?= htmlspecialchars($journal["title"]) ?></h5>
-                <p class="card-text"><?= nl2br(htmlspecialchars(limitWords($journal["description"], 20 ))) ?></p>
-                <h6 class="card-subtitle mb-2 text-color">
-                  Created: <?= date('d.m.Y', strtotime($journal['created_at'])) ?>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <?= date('d.m.Y', strtotime($journal['created_at'])) ?>
                 </h6>
+                <p class="card-text"><?= nl2br(htmlspecialchars($journal["description"])) ?></p>
               </div>
             </div>
         <?php endforeach; ?>
@@ -173,21 +159,19 @@ function limitWords($text, $limit = 100) {
         <?php foreach ($availableQuests as $quest): ?>
           <div class="card mb-3 quest-card" 
             data-title="<?= htmlspecialchars($quest["title"]) ?>"
-            data-description="<?= htmlspecialchars($quest["description"]) ?>"
+            data-description="<?= htmlspecialchars(limitWords($quest["description"], 20)) ?>"
             data-reward="<?= $quest["reward"] ?>"
             data-xp="<?= $quest["xp"] ?>"
             data-created="<?= date('d.m.Y', strtotime($quest['created_at'])) ?>"
             data-due="<?= date('d.m.Y', strtotime($quest['due_date'] ?? $quest['created_at'])) ?>">
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($quest["title"]) ?></h5>
-            <p><span class="quest-label">Status:</span> 
-              <?= $quest['is_active'] ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Not active</span>' ?>
-            </p>
-            <p><span class="quest-label">Reward:</span> 🪙 <span class="quest-value"><?= $quest["reward"] ?> Gold</span></p>
-            <p><span class="quest-label">XP:</span> ⭐ <?= $quest["xp"] ?> XP</p>
-            <p><span class="quest-label">Created:</span><span class="quest-value"><?= date('d.m.Y', strtotime($quest['created_at'])) ?></span></p>
-            <p><span class="quest-label">Due date:</span><span class="quest-value"><?= date('d.m.Y', strtotime($quest['created_at'])) ?></span></p>
-
+            <h6 class="card-subtitle mb-2 text-muted"><?= date('d.m.Y', strtotime($quest['created_at'])) ?></h6>
+            <ul class="mb-2">
+              <li><strong>Belohnung: 🪙 </strong> <?= $quest["reward"] ?> Gold</li>
+              <li><strong>XP: ⭐ </strong> <?= $quest["xp"] ?> XP</li>
+            </ul>
+            <p><?= nl2br(htmlspecialchars($quest["description"])) ?></p>
             <form method="POST" action="?controller=quest&action=toggleStatus">
               <input type="hidden" name="quest_id" value="<?= $quest['id'] ?>">
               <input type="hidden" name="is_active" value="1">

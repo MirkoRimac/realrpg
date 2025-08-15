@@ -58,7 +58,8 @@ nav > a {
 }
 
 footer {
-    color: var(--color-surface);
+    color: var(--text-color);
+    background-color: var(--color-surface);
 }
 
 a {
@@ -150,6 +151,33 @@ a {
   width: 100%;
 }
 
+/* Test mit ChatGPT Styling Vorschlag für bessere Barrierefreiheit */
+
+.card-title {
+  font-size: 1.25rem;
+  color: #f5f5f5;
+  margin-bottom: 0.75rem;
+}
+
+.quest-label {
+  /* font-size: 0.85rem; */
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  /* color: #bbbbbb; */
+  color: #cccccc;
+  color: #0097B2 ;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-right: 0.25rem;
+}
+
+.quest-value {
+  color: #ffffff;
+}
+
+
+/* Test mit ChatGPT Styling Vorschlag für bessere Barrierefreiheit End */
+
     /* Quests End */
 
 .card {
@@ -211,7 +239,6 @@ a {
 .btn:hover {
   opacity: 0.9;
 }
-
 
 /* Wuederverwebdbare Komponenten Ende */
 

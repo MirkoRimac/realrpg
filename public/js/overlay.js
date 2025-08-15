@@ -1,89 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//   const modalOverlay = document.getElementById('modalOverlay');
-//   const modalBody = document.getElementById('modalBody');
-//   const closeBtn = document.querySelector('.close-btn');
-
-//   // Öffne Modal, wenn eine Quest-Karte angeklickt wird
-//   document.querySelectorAll('.quest-card').forEach(card => {
-//     card.addEventListener('click', () => {
-//       const title = card.dataset.title;
-//       const desc = card.dataset.description;
-//       const reward = card.dataset.reward;
-//       const xp = card.dataset.xp;
-//       const created = card.dataset.created;
-//       const due = card.dataset.due;
-
-//       modalBody.innerHTML = `
-//         <h2>🗺️ ${title}</h2>
-//         <p>${desc}</p>
-//         <ul class="mt-3">
-//           <li><strong>Belohnung:</strong> 🪙 ${reward} Gold</li>
-//           <li><strong>XP:</strong> ⭐ ${xp}</li>
-//           <li><strong>Erstellt:</strong> ${created}</li>
-//           <li><strong>Fällig bis:</strong> ${due}</li>
-//         </ul>
-//       `;
-
-//       modalOverlay.classList.remove('d-none');
-//     });
-//   });
-
-//   closeBtn.addEventListener('click', () => modalOverlay.classList.add('d-none'));
-//   modalOverlay.addEventListener('click', e => {
-//     if (e.target.id === 'modalOverlay') {
-//       modalOverlay.classList.add('d-none');
-//     }
-//   });
-// });
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const modalOverlay = document.getElementById('modalOverlay');
-//   const modalBody = document.getElementById('modalBody');
-//   const closeBtn = modalOverlay.querySelector('.close-btn');
-
-//   // Handler für Karten-Klicks
-//   document.querySelectorAll('.quest-card').forEach(card => {
-//     card.addEventListener('click', () => {
-//       const title = card.dataset.title;
-//       const desc = card.dataset.description;
-//       const reward = card.dataset.reward;
-//       const xp = card.dataset.xp;
-//       const created = card.dataset.created;
-//       const due = card.dataset.due;
-
-//       modalBody.innerHTML = `
-//         <h4 class="mb-3">${title}</h4>
-//         <p>${desc}</p>
-//         <ul class="list-unstyled mt-3">
-//           <li><strong>Belohnung:</strong> 🪙 ${reward} Gold</li>
-//           <li><strong>XP:</strong> ⭐ ${xp}</li>
-//           <li><strong>Erstellt:</strong> ${created}</li>
-//           <li><strong>Fällig bis:</strong> ${due}</li>
-//         </ul>
-//       `;
-
-//       modalOverlay.classList.remove('d-none');
-//     });
-
-//     // Verhindere Modal-Trigger durch Buttons oder Formulare innerhalb der Karte
-//     card.querySelectorAll('form, button, a').forEach(el => {
-//       el.addEventListener('click', e => e.stopPropagation());
-//     });
-//   });
-
-//   // Schließen über "X"
-//   closeBtn.addEventListener('click', () => {
-//     modalOverlay.classList.add('d-none');
-//   });
-
-//   // Schließen durch Klick auf Hintergrund
-//   modalOverlay.addEventListener('click', (e) => {
-//     if (e.target === modalOverlay) {
-//       modalOverlay.classList.add('d-none');
-//     }
-//   });
-// });
-
 document.addEventListener('DOMContentLoaded', () => {
   const modalOverlay = document.getElementById('modalOverlay');
   const modalBody = document.getElementById('modalBody');
@@ -108,20 +22,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   attachCardClick('.quest-card', data => `
-    <h4 class="mb-3">${data.title}</h4>
-    <p>${data.description}</p>
+    <h4 class="mb-3 quest-title">${data.title}</h4>
+    <p><span class="quest-value">${data.description}</span></p>
     <ul class="list-unstyled mt-3">
-      <li><strong>Belohnung:</strong> 🪙 ${data.reward} Gold</li>
-      <li><strong>XP:</strong> ⭐ ${data.xp}</li>
-      <li><strong>Erstellt:</strong> ${data.created}</li>
-      <li><strong>Fällig bis:</strong> ${data.due}</li>
+      <li><span class="quest-label">Reward:</span> 🪙 ${data.reward} Gold</li>
+      <li><span class="quest-label">XP:</span> ⭐ ${data.xp}</li>
+      <li><span class="quest-label">Created:</span> ${data.created}</li>
+      <li><span class="quest-label">Due date:</span> ${data.due}</li>
     </ul>
   `);
 
   attachCardClick('.journal-card', data => `
-    <h4 class="mb-3">${data.title}</h4>
-    <p>${data.description}</p>
-    <p class="mt-3 text-muted"><strong>Erstellt:</strong> ${data.created}</p>
+    <ul class="list-unstyled mt-3">
+      <li><h4 class="mb-3">${data.title}</h4></li>
+      <li><p class="mt-3"><span class="quest-label">Created:</span> ${data.created}</p></li>
+      <li><p>${data.description}</p></li>
+    </ul>
+  `);
+
+  attachCardClick('.avatar-card', data => `
+    <ul class="list-unstyled mt-3">
+      <li><span class="quest-label mb-3">Name: </span>${data.name}</li>
+      <li><span class="quest-label mb-3">Race: </span>${data.race}</li>
+      <li><span class="quest-label mb-3">Class: </span>${data.class}</li>
+      <li><span class="quest-label mb-3">XP: </span>⭐ ${data.xp} Gold</li>
+      <li><span class="quest-label mb-3">Gold: </span>🪙 ${data.gold} XP</li>
+      <li><span class="quest-label">Backstory: </span>${data.backstory}</li>
+    </ul>  
+  `);
+
+  attachCardClick('.item-card', data => `
+    <ul class="list-unstyled mt-3">
+      <div class="d-flex flex-column align-items-center mb-4">
+          <img src="../public/sprites/logo.png" width="200">
+      </div>
+      <li><span class="quest-label mb-3">Item: </span>${data.name}</li>
+      <li><span class="quest-label mb-3">Price:</span> 🪙 ${data.price} Gold</li>
+      <li><span class="quest-label mb-3">Rarity: </span>${data.rarity}</li>
+      <li><span class="quest-label mb-3">Description: </span>${data.description}</li>
+      <form method="POST" action="?controller=shop&action=buy" class="d-flex gap-2">
+        <input type="hidden" name="item_id" value="<?= (int)$item['id'] ?>">
+        <input type="number" name="qty" min="1" value="1" class="form-control form-control-sm w-auto">
+        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+      </form>
+    </ul>
   `);
 
   closeBtn.addEventListener('click', () => {
