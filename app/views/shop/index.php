@@ -6,17 +6,19 @@
             <!-- <div class="col-12 col-lg-3"> -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card item-card h-100" style="cursor: pointer"
+                    data-id="<?= (int)$item["id"]; ?>"
+                    data-img="sprites/<?= htmlspecialchars($item["icon"]); ?>"
                     data-name="<?= htmlspecialchars($item["name"]); ?>"
                     data-price="<?= htmlspecialchars($item["price"]); ?>"
                     data-rarity="<?= htmlspecialchars($item["rarity"]); ?>"
                     data-description="<?= htmlspecialchars($item["description"]); ?>">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center mb-4">
-                            <img src="../public/sprites/logo.png" width="200">
+                            <img src="sprites/<?= htmlspecialchars($item["icon"]); ?>" width="150" class="pixel-art">
                         </div>
                         <p><span class="quest-label">Item:</span> <span class="quest-value"><?= htmlspecialchars($item["name"]); ?><span></p>
                         <p><span class="quest-label">Price:</span> 🪙 <span class="quest-value"><?= htmlspecialchars($item["price"]); ?> Gold<span></p>
-                        <p><span class="quest-label">Rarity:</span><span class="quest-value"><?= htmlspecialchars($item["rarity"]); ?><span></p>
+                        <p><span class="quest-label">Rarity:</span><span class="badge-rarity <?= strtolower($item['rarity']); ?>"><?= htmlspecialchars($item["rarity"]); ?><span></p>
                     </div>
                 </div>
             </div>

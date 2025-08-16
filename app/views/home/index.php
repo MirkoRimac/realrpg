@@ -9,6 +9,12 @@
       <p class="fade-in-title" style="animation-delay: 1.5s; color:#FFDE59;">into a fantasy adventure</p>
       <span class="fade-in-title" style="animation-delay: 2.5s;">with</span>
       <img src="sprites/logo.png" class="fade-in-title" style="animation-delay: 3.5s; max-width: 250px;" alt="Logo">
-    <a class="btn btn-success fade-in-title" style="animation-delay: 3.5s; color:#0097B2;" href="?controller=auth&action=register">Start Now</a>
+    <a class="btn btn-success fade-in-title" style="animation-delay: 3.5s;" href="?controller=auth&action=register">Start Now</a>
   </div>
 </div>
+
+
+<!-- 
+color:#0097B2;
+color:#FFDE59;
+-->

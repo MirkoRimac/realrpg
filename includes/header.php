@@ -32,6 +32,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
         <!-- Je nach Log-In-Status -->
         <?php if ($isLoggedIn): ?>
           <li class="nav-item"><a class="nav-link" href="?controller=dashboard&action=index">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="?controller=inventory&action=index">Inventory</a></li>
           <li class="nav-item"><a class="nav-link" href="?controller=shop&action=index">Shop</a></li>
           <li class="nav-item"><a class="nav-link text-accent" href="?controller=auth&action=logout">Logout</a></li>
         <?php else: ?>
