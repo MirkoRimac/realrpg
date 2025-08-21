@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\User;
+
 class AvatarController extends Controller 
 {
     public function create()
@@ -9,12 +14,11 @@ class AvatarController extends Controller
 
     public function store()
     {
-        session_start();
         $userId = $_SESSION["user_id"] ?? null;
 
         if (!$userId)
         {
-            header("Location: ?controller=auth&action=login");
+            $this->redirect("?controller=auth&action=login");
             exit;
         }
 
@@ -24,10 +28,9 @@ class AvatarController extends Controller
         $skinColor = $_POST["skinColor"];
         $clothesColor = $_POST["clothesColos"];
 
-        require_once "../app/models/User.php";
         $userModel = new User();
         $userModel->updateAvatar($userId, $race, $class, $backstory, $skinColor, $clothesColor);
 
-        header("Location: ?controller=dashboard&action=index");
+        $this->redirect("?controller=dashboard&action=index");
     }
 }

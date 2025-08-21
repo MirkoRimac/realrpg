@@ -1,0 +1,13 @@
+{
+  "name": "moerko/realrpg",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    },
+    "files": [
+      "app/Helpers/xp.php"
+    ]
+  },
+  "require": {}
+}

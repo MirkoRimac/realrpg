@@ -1,33 +1,46 @@
 <?php
 
-// if (session_status() !== PHP_SESSION_ACTIVE) { session_start();}
+namespace App\Controllers;
 
-require_once "../app/models/Shop.php";
-require_once "../app/models/User.php";
+use App\Core\Controller;
+use App\Models\Shop;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(): void
     {
-        $user_id = $_SESSION["user_id"];
-        $shopModel = new Shop();
-        $items = $shopModel->getAll($user_id);
+        $shop = new Shop();
+        $items = $shop->getAll();
 
-        $this->view("shop/index", [
-            "items" => $items
-        ]);
+        $this->view("shop/index", ["items" => $items]);
     }
 
     public function buy()
     {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST")
+        {
+            $this->redirect("?controller=shop&action=index");
+        }
+
         $userId = $_SESSION["user_id"] ?? null;
-        $itemId = (int)$_POST["item_id"];
-        $qty = max(1, (int)$_POST["qty"]);
+        if(!$userId) 
+        { 
+            $this->redirect("?controller=auth&action=login"); 
+        }
+
+        $itemId = (int)$_POST["item_id"] ?? 0;
+        $qty = max(1, (int)$_POST["qty"]) ?? 1;
 
         $shop = new Shop();
-        $shop->buy($userId, $itemId, $qty);
 
-        header("Location: ?controller=shop&action=index");
-        
+        try {
+            $shop->buy($userId, $itemId, $qty);
+            $_SESSION["flasch_success"] = "Item purchased!";
+        }
+        catch (\Throwable $e) {
+            $_SESSION["flash_error"] = "Purchase failes: " .$e->getMessage();
+        }
+
+        $this->redirect("?controller=shop&action=index");
     }
 }

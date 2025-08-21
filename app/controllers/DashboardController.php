@@ -1,32 +1,38 @@
 <?php
 
-require_once "../app/models/Dashboard.php";
-require_once "../app/models/User.php";
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\User;
+use App\Models\Dashboard;
+use App\Models\Quest;
+use App\Models\Journal;
 
 class DashboardController extends Controller
 {
     public function index()
     {
 
-        $user_id = $_SESSION["user_id"];
+        $userId = $_SESSION["user_id"] ?? null;
 
-        require_once "../app/models/Dashboard.php";
-        require_once "../app/models/Quest.php";
-        require_once "../app/models/Journal.php";
+        if(!$userId)
+        {
+            $this->redirect("?controller=auth&action?loign");
+        }
 
+        // Models instanziieren
         $dashboardModel = new Dashboard();
-        $dashboard = $dashboardModel->getAll();
-
         $questModel = new Quest();
-        $quests = $questModel->getActiveByUser($user_id);
-        $availableQuests = $questModel->getInactiveByUser($user_id);
-
         $journalModel = new Journal();
-        $journals = $journalModel->getActiveByUser($user_id);
-        $availableJournal = $journalModel->getInactiveByUser($user_id);
-
         $userModel = new User();
-        $user = $userModel->getById($user_id);
+
+        // Daten laden
+        $dashboard = $dashboardModel->getAll();
+        $quests = $questModel->getActiveByUser((int)$userId);
+        $availableQuests = $questModel->getInactiveByUser((int)$userId);
+        $journals = $journalModel->getActiveByUser((int)$userId);
+        $availableJournal = $journalModel->getInactiveByUser((int)$userId);
+        $user = $userModel->getById((int)$userId);
 
         $this->view("dashboard/index", [
             "dashboard" => $dashboard,
@@ -40,6 +46,6 @@ class DashboardController extends Controller
 
     public function test()
     {
-        
+        echo "OK";
     }
 }

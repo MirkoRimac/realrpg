@@ -1,6 +1,9 @@
 <?php
 
-require_once "../app/models/User.php";
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -16,9 +19,8 @@ class AuthController extends Controller
 
         if ($user && password_verify($_POST["password"], $user["password"]))
         {
-            session_start();
             $_SESSION["user_id"] = $user["id"];
-            header("Location: ?controller=dashboard&action=index");
+            $this->redirect("?controller=dashboard&action=index");
         }
         else
         {
@@ -38,16 +40,14 @@ class AuthController extends Controller
 
         $user = $userModel->findByEmail($_POST["email"]);
         
-        session_start();
         $_SESSION["user_id"] = $user["id"];
 
-        header("Location: ?controller=avatar&action=create");
+        $this->redirect("?controller=avatar&action=create");
     }
 
     public function logout()
     {
-        session_start();
         session_destroy();
-        header("Location: ?controller=home&action=index");
+        $this->redirect("?controller=home&action=index");
     }
 }

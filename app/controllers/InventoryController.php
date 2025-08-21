@@ -1,8 +1,9 @@
 <?php
 
-require_once "../app/models/Inventory.php";
-require_once "../app/models/User.php";
-require_once "../app/models/Shop.php";
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\Inventory;
 
 class InventoryController extends Controller
 {

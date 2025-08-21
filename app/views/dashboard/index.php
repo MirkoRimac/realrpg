@@ -1,3 +1,5 @@
+
+
 <!-- Limitiere angezeigte Wörter -->
 <?php
 function limitWords($text, $limit = 100) {

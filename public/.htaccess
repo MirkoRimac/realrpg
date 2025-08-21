@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /realrpg/public/
+
+  # Direkt liefern, wenn Datei/Ordner existiert:
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # sonst an index.php
+  RewriteRule ^ index.php [L]
+</IfModule>

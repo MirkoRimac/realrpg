@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models;
+
+use App\Core\Model;
+use PDO;
+
 class User extends Model
 {
     public function findByEmail($email)

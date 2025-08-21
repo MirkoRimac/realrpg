@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models;
+
+use App\Core\Model;
+use PDO;
+
 class Quest extends Model 
 {
     public function getAll()
@@ -23,7 +28,7 @@ class Quest extends Model
         ]);
     }
 
-    public function getActiveByUser($userId)
+    public function getActiveByUser(int $userId): array
     {
         $stmt = $this->pdo->prepare("SELECT * FROM quests WHERE user_id = ? AND is_active = 1");
         $stmt->execute([$userId]);
