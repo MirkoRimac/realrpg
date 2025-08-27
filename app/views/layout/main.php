@@ -64,7 +64,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Detailed view</h5>
-        <button type="button" class="btn-close close-btn" aria-label="Close">✖</button>
+        <button type="button" class="btn-close close-btn" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalBody">
         <!-- Inhalte werden dynamisch per JS eingefügt -->

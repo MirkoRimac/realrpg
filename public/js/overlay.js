@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   attachCardClick('.quest-card', data => `
-    <h4 class="mb-3 quest-title">${data.title}</h4>
+    <h4 class="mb-3 quest-title">${data.title} <span class="badge badge-category">${data.category}</span></h4>
     <p><span class="quest-value">${data.description}</span></p>
     <ul class="list-unstyled mt-3">
       <li><span class="quest-label">Reward:</span> 🪙 ${data.reward} Gold</li>

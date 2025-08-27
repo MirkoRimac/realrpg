@@ -16,7 +16,7 @@
                         <div class="d-flex flex-column align-items-center mb-4">
                         <img src="sprites/<?= htmlspecialchars($it['icon']) ?>"
                             alt="<?= htmlspecialchars($it['name']) ?>"
-                            class="pixel-art mb-3" width="128" height="128">
+                            class="pixel-art mb-3" width="180">
                         </div>
                         <h5 class="card-title"><?= htmlspecialchars($it['name']) ?></h5>
                         <p class="mb-1">
