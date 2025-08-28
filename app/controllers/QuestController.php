@@ -102,7 +102,7 @@ class QuestController extends Controller
         $quest = $questModel->getById($questId);
         $xpReward = $quest["xp"] ?? 0;
 
-        // 1. Quest deaktivieren
+        // 1. Quest deaktivieren (später auch löschen oder bei täglichen Tasks am nächsten Tag wieder aktivieren)
         $questModel->updateStatus($questId, 0);
 
         // 2. XP hinzufügen

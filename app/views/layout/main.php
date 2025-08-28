@@ -3,7 +3,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 
-// robust & eindeutig:
+// Ist der User eingeloggt?? - für die Navbar
 $isLoggedIn = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
 ?>
 
@@ -16,10 +16,10 @@ $isLoggedIn = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../includes/style.css">
     <link rel="icon" type="image/x-icon" href="sprites/logo.png">
-    <title>Real RPG</title>
+    <title><?= $title ?></title>
 </head>
 <!-- <body class="d-flex flex-column h-100"> -->
-<body class="d-flex flex-column h-100 <?= isset($bodyClass) ? htmlspecialchars($bodyClass) : '' ?>">
+<body class="d-flex flex-column h-100">
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark transparent-navbar"> 
@@ -38,13 +38,13 @@ $isLoggedIn = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
                 
                 <!-- Je nach Log-In-Status -->
                 <?php if ($isLoggedIn): ?>
-                <li class="nav-item"><a class="nav-link" href="?controller=dashboard&action=index">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="?controller=inventory&action=index">Inventory</a></li>
-                <li class="nav-item"><a class="nav-link" href="?controller=shop&action=index">Shop</a></li>
-                <li class="nav-item"><a class="nav-link text-accent" href="?controller=auth&action=logout">Logout</a></li>
+                  <li class="nav-item"><a class="nav-link" href="?controller=dashboard&action=index">Dashboard</a></li>
+                  <li class="nav-item"><a class="nav-link" href="?controller=inventory&action=index">Inventory</a></li>
+                  <li class="nav-item"><a class="nav-link" href="?controller=shop&action=index">Shop</a></li>
+                  <li class="nav-item"><a class="nav-link text-accent" href="?controller=auth&action=logout">Logout</a></li>
                 <?php else: ?>
-                <li class="nav-item"><a class="nav-link" href="?controller=auth&action=register">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="?controller=auth&action=login">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="?controller=auth&action=register">Register</a></li>
+                  <li class="nav-item"><a class="nav-link" href="?controller=auth&action=login">Login</a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -67,7 +67,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
         <button type="button" class="btn-close close-btn" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalBody">
-        <!-- Inhalte werden dynamisch per JS eingefügt -->
+        <!-- Inhalte werden dynamisch per JS eingefügt - overlay.js im Public Ordner -->
       </div>
     </div>
   </div>

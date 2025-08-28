@@ -10,6 +10,7 @@ class Controller
 
         // KI generiert
         // View in Buffer -> $content 
+        // Laut KI - klassisches Layout-System (Templating) wie bei Symfony, Laravel, etc.
         ob_start();
         require __DIR__ . "/../views/" . $view . ".php";
         $content = ob_get_clean();

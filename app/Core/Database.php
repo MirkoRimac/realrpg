@@ -14,6 +14,10 @@ class Database
     }
     */
 
+
+    // Singleton Prinzip
+    // Die Klasse merkt sich eine einzige Datenbankverbindung und wird nur einmal erstellt beim ersten Aufruf. Kein ständiges neu Verbinden wie davor
+
     private static ?PDO $instance = null;
 
     public static function getInstance(): PDO
@@ -25,6 +29,8 @@ class Database
             $pass = "";
 
             try {
+                // ERRMODE_EXCEPTION wirft Fehler als Exceptions aus (gut zum debuggen)
+                // FETCH_ASSOC - die DB Ergebnisse werden als assoziative Arrays zurückgegeben statt numerischer Indizes
                 self::$instance = new PDO($dsn, $user, $pass, [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
