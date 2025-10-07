@@ -25,8 +25,8 @@ class Database
         if (self::$instance === null)
         {
             $dsn = "mysql:host=127.0.0.1;dbname=realrpg;charset=utf8mb4";
-            $user = "root";
-            $pass = "";
+            $user = "realrpg";
+            $pass = "SehrStarkesPasswort";
 
             try {
                 // ERRMODE_EXCEPTION wirft Fehler als Exceptions aus (gut zum debuggen)
