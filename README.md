@@ -5,14 +5,14 @@
 
 ## 🌱 About the Project
 
-It all started as a simple **To-Do list experiment** — just for fun.  
+It all started as a simple **To-Do list experiment** just for fun.  
 Then came the thought:  
 > “What if I made it look more like a game?”
 
-And then it *escalated* — fast.  
+And then it *escalated*, fast.  
 
-Now it’s a full-blown **RPG-style quest tracker** with characters, active quests, a level system, and a retro fantasy UI.  
-It’s still growing, refactoring, and transforming — one quest at a time. ⚔️
+Now it’s a **RPG-style quest tracker** with characters, active quests, a level system, and a retro fantasy UI.  
+It’s still growing, refactoring, and transforming, one quest at a time. ⚔️
 
 ---
 
@@ -21,7 +21,7 @@ It’s still growing, refactoring, and transforming — one quest at a time. ⚔
 > 🚧 **This project is still in active development.**  
 > The current version is written in **vanilla PHP**, but a **Laravel migration** is already underway.  
 > Some security improvements (like XSS prevention, CSRF tokens, and stronger input validation) will be part of that transition.  
-> I’m aware that the current prototype is far from production-ready — it’s a playground for learning, experimenting, and improving.
+> I’m aware that the current prototype is far from production-ready, it’s a playground for learning, experimenting, and improving.
 
 ---
 
@@ -54,7 +54,7 @@ It’s still growing, refactoring, and transforming — one quest at a time. ⚔
 
 > “Real life is the ultimate RPG. You just need to see it that way.”
 
-RealRPG gamifies everyday productivity — by turning real-world tasks into quests, progress into XP, and self-growth into adventure.
+RealRPG gamifies everyday productivity by turning real-world tasks into quests, progress into XP, and self-growth into adventure.
 
 ---
 
@@ -109,7 +109,7 @@ RealRPG gamifies everyday productivity — by turning real-world tasks into ques
 
 ## ⚠️ Disclaimer
 
-> This is not a production-grade app — yet.  
+> This is not a production-grade app yet.  
 > Some parts are messy. Some are fun. All are written with love and curiosity.
 
 ---
