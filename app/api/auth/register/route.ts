@@ -4,6 +4,7 @@ import { getSession } from "@/lib/sessions";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
+
   const username = typeof body?.username === "string" ? body.username.trim() : "";
   const password = typeof body?.password === "string" ? body.password : "";
 
@@ -15,7 +16,6 @@ export async function POST(req: Request) {
 
   const passwordHash = await bcrypt.hash(password, 12);
 
-  // Standard: registrierter User bekommt direkt eine Party
   const partyName = `${username}'s Party`;
 
   const user = await prisma.user.create({
