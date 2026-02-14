@@ -25,10 +25,6 @@ export async function POST(req: Request) {
     data: {
       title,
       description: typeof body.description === "string" ? body.description.trim() : null,
-      startAt: body.startAt ? new Date(body.startAt) : null,
-      dueAt: body.dueAt ? new Date(body.dueAt) : null,
-      xpReward: Number.isFinite(body.xpReward) ? body.xpReward : undefined,
-      goldReward: Number.isFinite(body.goldReward) ? body.goldReward : undefined,
       partyId: session.user.partyId,
     },
   });
