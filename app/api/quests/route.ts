@@ -1,7 +1,12 @@
 import { prisma } from "@/lib/prisma";
+import { getSession } from "@/lib/session";
 
 export async function GET() {
+  const session = await getSession();
+  if (!session.user) return Response.json({ error: "unauthorized" }, { status: 401 });
+
   const quests = await prisma.quest.findMany({
+    where: { partyId: session.user.partyId },
     orderBy: { createdAt: "desc" },
   });
 
@@ -9,20 +14,22 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
+  const session = await getSession();
+  if (!session.user) return Response.json({ error: "unauthorized" }, { status: 401 });
 
-  if (!body || typeof body.title !== "string" || body.title.trim().length === 0) {
-    return Response.json({ error: "title is required" }, { status: 400 });
-  }
+  const body = await req.json().catch(() => null);
+  const title = typeof body?.title === "string" ? body.title.trim() : "";
+  if (!title) return Response.json({ error: "title is required" }, { status: 400 });
 
   const quest = await prisma.quest.create({
     data: {
-      title: body.title.trim(),
+      title,
       description: typeof body.description === "string" ? body.description.trim() : null,
       startAt: body.startAt ? new Date(body.startAt) : null,
       dueAt: body.dueAt ? new Date(body.dueAt) : null,
       xpReward: Number.isFinite(body.xpReward) ? body.xpReward : undefined,
       goldReward: Number.isFinite(body.goldReward) ? body.goldReward : undefined,
+      partyId: session.user.partyId,
     },
   });
 
