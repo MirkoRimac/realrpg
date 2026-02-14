@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: realrpg_db
+    environment:
+      POSTGRES_USER: realrpg
+      POSTGRES_PASSWORD: realrpg
+      POSTGRES_DB: realrpg
+    ports:
+      - "5432:5432"
+    volumes:
+      - realrpg_pgdata:/var/lib/postgresql/data
+
+volumes:
+  realrpg_pgdata:
