@@ -23,26 +23,42 @@ datasource db {
 }
 
 model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  passwordHash String
+  partyId      String?
+  party        Party?   @relation(fields: [partyId], references: [id])
+
+  createdAt    DateTime @default(now())
+}
+
+model Party {
   id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
+  name      String
+  members   User[]
+  quests    Quest[]
   createdAt DateTime @default(now())
 }
 
 model Quest {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   description String?
   startAt     DateTime?
   dueAt       DateTime?
-  xpReward    Int      @default(10)
-  goldReward  Int      @default(5)
+  xpReward    Int        @default(10)
+  goldReward  Int        @default(5)
   status      QuestStatus @default(OPEN)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  partyId     String
+  party       Party      @relation(fields: [partyId], references: [id])
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 enum QuestStatus {
   OPEN
   COMPLETED
 }
+
