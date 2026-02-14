@@ -4,6 +4,7 @@ import { getSession } from "@/lib/sessions";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
+
   const username = typeof body?.username === "string" ? body.username.trim() : "";
   const password = typeof body?.password === "string" ? body.password : "";
 
