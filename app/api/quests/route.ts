@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getSession } from "@/lib/session";
+import { getSession } from "@/lib/sessions";
 
 export async function GET() {
   const session = await getSession();

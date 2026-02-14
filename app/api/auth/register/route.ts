@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { getSession } from "@/lib/session";
+import { getSession } from "@/lib/sessions";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
