@@ -28,3 +28,21 @@ model User {
   name      String?
   createdAt DateTime @default(now())
 }
+
+model Quest {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  startAt     DateTime?
+  dueAt       DateTime?
+  xpReward    Int      @default(10)
+  goldReward  Int      @default(5)
+  status      QuestStatus @default(OPEN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum QuestStatus {
+  OPEN
+  COMPLETED
+}
