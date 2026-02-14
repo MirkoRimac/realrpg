@@ -16,5 +16,5 @@ Turn tasks into quests, earn XP & gold, and grow together as a party.
 
 ### 1) Clone
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/MirkoRimac/realrpg.git
 cd realrpg
