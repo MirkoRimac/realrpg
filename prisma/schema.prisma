@@ -28,6 +28,11 @@ model User {
   passwordHash String
   partyId      String?
   party        Party?   @relation(fields: [partyId], references: [id])
+  xp   Int @default(0)
+  gold Int @default(0)
+
+  transactions WalletTransaction[]
+  completions  QuestCompletion[]
 
   createdAt    DateTime @default(now())
 }
@@ -37,8 +42,13 @@ model Party {
   name      String
   members   User[]
   quests    Quest[]
+
+  completions   QuestCompletion[]
+  transactions  WalletTransaction[]
+
   createdAt DateTime @default(now())
 }
+
 
 model Quest {
   id          String     @id @default(uuid())
@@ -53,6 +63,9 @@ model Quest {
   partyId     String
   party       Party      @relation(fields: [partyId], references: [id])
 
+  completions QuestCompletion[]
+  transactions WalletTransaction[]
+
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
@@ -62,3 +75,46 @@ enum QuestStatus {
   COMPLETED
 }
 
+model QuestCompletion {
+  id        String   @id @default(uuid())
+  questId   String
+  quest     Quest    @relation(fields: [questId], references: [id], onDelete: Cascade)
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  partyId   String
+  party     Party    @relation(fields: [partyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([questId]) // eine Quest kann nur einmal abgeschlossen werden
+}
+
+model WalletTransaction {
+  id        String @id @default(uuid())
+
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  partyId   String
+  party     Party  @relation(fields: [partyId], references: [id], onDelete: Cascade)
+
+  type      WalletTxType
+  xpChange  Int    @default(0)
+  goldChange Int   @default(0)
+  note      String?
+
+  questId   String?
+  quest     Quest? @relation(fields: [questId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([partyId, createdAt])
+}
+
+enum WalletTxType {
+  QUEST_REWARD
+  MANUAL_ADJUSTMENT
+}
