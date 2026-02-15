@@ -154,8 +154,11 @@ export default async function QuestsPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ opacity: 0.85 }}>
             {user?.username ?? "User"} · XP {user?.xp ?? 0} · Gold {user?.gold ?? 0}
+            
           </span>
-
+          <a href="/wallet" style={{ textDecoration: "underline", marginRight: 10 }}>
+            Wallet
+          </a>
           <form action={logout}>
             <button type="submit" style={{ padding: "8px 10px", borderRadius: 6, border: "1px solid #ccc" }}>
               Logout
