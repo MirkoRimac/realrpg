@@ -3,6 +3,11 @@
 ## Unreleased
 - (empty)
 
+## v0.4.0
+- Added quest completion flow (shared party quests)
+- Added XP/Gold rewards with wallet transaction ledger
+- Added wallet page showing transaction history and totals
+
 ## v0.3.0
 - Added username/password authentication (register, login, logout)
 - Added party (family) system and session handling
